@@ -1,24 +1,75 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './style.css';
 
-const Icon = ({name, size=20}) => { const paths = { shield:<><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></>, lock:<><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></>, repeat:<><path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4m14-1v2a3 3 0 0 1-3 3H3"/></>, check:<path d="m5 12 4 4L19 6"/>, spark:<><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3ZM19 16l.7 2.3L22 19l-2.3.7L19 22l-.7-2.3L16 19l2.3-.7L19 16Z"/></>, close:<path d="M5 5l14 14M19 5 5 19"/> }; return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg> };
-const Brand=()=> <a className="brand" href="#top" aria-label="Back Off My Data home"><span className="brand-mark"><Icon name="shield" size={23}/></span><span>back off<br/><b>my data.</b></span></a>;
-function App(){
- const [modal,setModal]=useState(false),[step,setStep]=useState(0),[faq,setFaq]=useState(null);
- const open=()=>{setStep(0);setModal(true)};
- const faqs=[['Does this delete everything about me online?','No. The concept is to help submit and follow up on eligible deletion requests. Results depend on the company, applicable law, verification, and exceptions. No service can promise to erase all of your information everywhere.'],['What does “daily” mean?','Our idea is daily automated follow-up activity over a year, where appropriate. Actual request frequency and channels will depend on each company’s rules and technical capabilities. This is not a live service yet.'],['Can I freeze my credit myself?','Yes. Credit freezes are free, and you can request one directly from each of the three nationwide credit bureaus. Our proposed service would offer guidance; it does not place freezes today.'],['Is this ready to purchase?','Not yet. This is a concept prototype for feedback. There is no payment, account creation, deletion request, or credit freeze in this demo.']];
- return <div id="top"><div className="prototype-bar">A WORK IN PROGRESS <span>·</span> This is a concept prototype. No service or payment is live.</div><header className="header wrap"><Brand/><nav aria-label="Main navigation"><a href="#how">How it works</a><a href="#included">What’s included</a><a href="#questions">FAQs</a></nav><button className="button button-dark header-cta" onClick={open}>See the concept</button></header>
- <main><section className="hero wrap"><div className="hero-copy"><div className="eyebrow"><span className="tiny-spark">✳</span> A LITTLE MORE PRIVACY. A LOT MORE PEACE OF MIND.</div><h1>Your data.<br/><em>Your call.</em></h1><p className="hero-lede">Your personal information gets around. We’re imagining a simpler way to tell it where to get off.</p><div className="hero-actions"><button className="button button-lime" onClick={open}>Explore the idea <span>↗</span></button><a className="text-link" href="#how">See how it could work <span>↓</span></a></div><div className="hero-note"><span className="mini-check"><Icon name="check" size={14}/></span> Designed for real life, not fine print.</div></div>
- <div className="hero-art" aria-label="Illustration of a privacy dashboard"><div className="art-orbit orbit-one"></div><div className="art-orbit orbit-two"></div><div className="art-label label-top"><span>✳</span> YOUR PRIVACY, PRIORITIZED</div><div className="dashboard"><div className="dash-top"><div className="dash-brand"><span className="dash-logo"><Icon name="shield" size={18}/></span><div><b>Your privacy space</b><small>Concept preview</small></div></div><span className="dash-dots">•••</span></div><div className="dash-heading"><div><small>THE BIG PICTURE</small><h3>Let’s take back<br/>some control.</h3></div><span className="dash-shield"><Icon name="shield" size={28}/></span></div><div className="dash-divider"></div><div className="dash-row"><span className="row-icon"><Icon name="repeat" size={17}/></span><div><b>Removal requests</b><small>Ongoing follow-up, imagined</small></div><span className="pill">CONCEPT</span></div><div className="dash-row"><span className="row-icon peach"><Icon name="lock" size={17}/></span><div><b>Credit freeze guide</b><small>Three bureaus, one place to start</small></div><span className="pill">CONCEPT</span></div><div className="dash-bottom"><span>✳</span> A little less out there. A little more you.</div></div><div className="floating-tag"><span className="tag-icon"><Icon name="check" size={18}/></span><span><b>Made to keep up</b><small>Because data doesn’t sit still.</small></span></div><div className="art-label label-bottom">LESS DATA DRAMA <span>✳</span> MORE YOU</div></div></section>
- <section className="ticker" aria-label="Our approach"><div>LESS EXPOSURE <span>✳</span> MORE CONTROL <span>✳</span> LESS DATA DRAMA <span>✳</span> MORE PEACE OF MIND <span>✳</span> LESS EXPOSURE <span>✳</span> MORE CONTROL <span>✳</span></div></section>
- <section id="how" className="section wrap how"><div className="section-intro"><div><div className="eyebrow">THE IDEA IS SIMPLE</div><h2>We’re on a mission to make<br/><em>“back off”</em> a little easier.</h2></div><p>Your information can travel further than you think. Back Off My Data is a proposed service to help you make privacy requests and keep up with the follow-through.</p></div><div className="steps"><article><span className="step-num">01 / GET STARTED</span><div className="step-icon"><Icon name="spark" size={27}/></div><h3>Tell us what matters.</h3><p>In the envisioned service, you’d give us permission to help with eligible requests. No detective hat required.</p></article><article><span className="step-num">02 / MAKE REQUESTS</span><div className="step-icon peach-bg"><Icon name="shield" size={27}/></div><h3>We do the asking.</h3><p>We’d help send deletion requests to supported companies using the channels they accept.</p></article><article><span className="step-num">03 / KEEP AT IT</span><div className="step-icon lavender-bg"><Icon name="repeat" size={27}/></div><h3>And keep showing up.</h3><p>Our goal is daily automated follow-up activity for a year, where appropriate. Because one-and-done isn’t the idea.</p></article></div><p className="fine-print">Availability, request frequency, and outcomes would depend on company policies, applicable law, verification, and technical access. This functionality is not yet implemented.</p></section>
- <section id="included" className="included"><div className="wrap included-grid"><div className="included-copy"><div className="eyebrow light-eyebrow">THE PROPOSED PLAN</div><h2>Big “please leave<br/>me alone” energy.</h2><p>One year. One simple idea: give your privacy a little more attention, even when life gets busy.</p><div className="price"><strong>$79<span>.99</span></strong><div><b>for one year</b><small>Proposed introductory price</small></div></div><button className="button button-lime" onClick={open}>Take a look inside <span>↗</span></button><small className="no-payment">Prototype only. No payment will be collected.</small></div><div className="included-card"><div className="card-kicker">THE VISION <span>✳</span></div><h3>Privacy, with a little persistence.</h3><div className="feature"><span><Icon name="repeat" size={20}/></span><div><b>Ongoing deletion request support</b><p>Help with eligible requests and follow-up activity across supported companies.</p></div></div><div className="feature"><span><Icon name="lock" size={20}/></span><div><b>Credit freeze guidance</b><p>A clear starting point for freezing your credit with Equifax, Experian, and TransUnion.</p></div></div><div className="feature"><span><Icon name="shield" size={20}/></span><div><b>One place to see the picture</b><p>A proposed dashboard to make your next steps easier to understand.</p></div></div><div className="card-foot">Credit freezes are free when requested directly from each bureau. This prototype does not place freezes or send requests.</div></div></div></section>
- <section className="quote-section wrap"><div className="quote-star">✳</div><p>“Your information should work for <em>you.</em><br/>Not the other way around.”</p><div>THAT’S THE IDEA BEHIND BACK OFF MY DATA.</div></section>
- <section id="questions" className="section faq wrap"><div><div className="eyebrow">GOOD QUESTIONS</div><h2>The fine print,<br/><em>in plain English.</em></h2><p>A good relationship starts with knowing what to expect.</p></div><div className="faq-list">{faqs.map(([q,a],i)=><div className="faq-item" key={q}><button aria-expanded={faq===i} onClick={()=>setFaq(faq===i?null:i)}>{q}<span>{faq===i?'−':'+'}</span></button>{faq===i&&<p>{a}</p>}</div>)}</div></section>
- <section className="final-cta"><div className="wrap final-inner"><div><div className="eyebrow">READY FOR A LITTLE MORE CONTROL?</div><h2>Let’s make privacy<br/><em>personal again.</em></h2><p>Take a peek at the idea and help us make it better.</p></div><button className="button button-dark" onClick={open}>Explore the prototype <span>↗</span></button></div></section></main>
- <footer className="footer wrap"><div><Brand/><p>A little more privacy.<br/>A lot more you.</p></div><div className="footer-right"><span>CONCEPT PROTOTYPE · 2026</span><p>Not a live privacy or identity protection service. No deletion or fraud-prevention outcome is guaranteed.</p><a href="https://www.consumerfinance.gov/ask-cfpb/what-do-i-do-if-i-am-a-victim-of-identity-theft-en-31/" target="_blank" rel="noreferrer">Learn about free credit freezes</a></div></footer>
- {modal&&<div className="modal-backdrop" onClick={()=>setModal(false)}><div className="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" onClick={e=>e.stopPropagation()}><button className="modal-close" aria-label="Close" onClick={()=>setModal(false)}><Icon name="close"/></button><div className="eyebrow">INTERACTIVE CONCEPT · {step+1} OF 3</div>{step===0&&<><div className="modal-icon"><Icon name="spark" size={28}/></div><h2 id="modal-title">Let’s make some room for privacy.</h2><p>Here’s a quick look at the signup we’re imagining. No account, personal information, or payment needed.</p><button className="button button-dark modal-next" onClick={()=>setStep(1)}>Show me how it works</button></>}{step===1&&<><div className="modal-icon"><Icon name="shield" size={28}/></div><h2 id="modal-title">First, we’d get your permission.</h2><p>A real signup would explain what information is needed and ask for your authorization before making eligible privacy requests on your behalf.</p><div className="demo-box"><Icon name="check" size={18}/> You’re just exploring. Nothing is being submitted.</div><button className="button button-dark modal-next" onClick={()=>setStep(2)}>Continue the tour</button></>}{step===2&&<><div className="modal-icon"><Icon name="repeat" size={28}/></div><h2 id="modal-title">That’s the idea. What do you think?</h2><p>We’re exploring a year of ongoing request support and credit freeze guidance for a proposed $79.99. The service is not live yet.</p><div className="demo-box"><Icon name="check" size={18}/> End of demo. No account or request was created.</div><button className="button button-dark modal-next" onClick={()=>setModal(false)}>Finish exploring</button></>}</div></div>}</div>
+function Shield({ size = 24 }) {
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg>;
+}
+
+function App() {
+  const [checkout, setCheckout] = useState(false);
+  const closeButton = useRef(null);
+  const checkoutButton = useRef(null);
+
+  useEffect(() => {
+    if (!checkout) return;
+    closeButton.current?.focus();
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setCheckout(false);
+      if (event.key === 'Tab') {
+        const buttons = event.currentTarget.querySelectorAll('[data-checkout-dialog] button');
+        if (buttons.length && (document.activeElement === buttons[0] && event.shiftKey || document.activeElement === buttons[buttons.length - 1] && !event.shiftKey)) {
+          event.preventDefault();
+          (event.shiftKey ? buttons[buttons.length - 1] : buttons[0]).focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => { document.removeEventListener('keydown', onKeyDown); checkoutButton.current?.focus(); };
+  }, [checkout]);
+
+  return <div className="page">
+    <div className="notice">Prototype preview · No payment or service is live</div>
+    <header className="header wrap">
+      <a className="brand" href="#top" aria-label="Back Off My Data home"><span className="brand-mark"><Shield size={22}/></span><span>back off<br/><strong>my data.</strong></span></a>
+      <span className="header-note">A little more privacy. A lot more you.</span>
+    </header>
+    <main id="top" className="wrap main">
+      <div className="intro">
+        <div className="eyebrow"><span>✳</span> YOUR DATA. YOUR CALL.</div>
+        <h1>Tell your data<br/><em>to back off.</em></h1>
+        <p className="lead">A proposed service to help request the removal of your personal information—and keep following up.</p>
+        <div className="benefits" aria-label="Proposed plan highlights">
+          <div><span className="benefit-icon">✓</span><span>Deletion request support</span></div>
+          <div><span className="benefit-icon">✓</span><span>Daily follow-up activity, where appropriate</span></div>
+          <div><span className="benefit-icon">✓</span><span>Guidance for freezing credit at all 3 bureaus</span></div>
+        </div>
+      </div>
+      <aside className="plan" aria-label="Proposed one-year plan">
+        <div className="plan-top"><span>THE PRIVACY PLAN</span><span className="plan-symbol"><Shield size={22}/></span></div>
+        <h2>One year of<br/>showing up.</h2>
+        <div className="price"><strong>$79<span>.99</span></strong><span>for one year<br/><small>Proposed price</small></span></div>
+        <button ref={checkoutButton} className="checkout-button" onClick={() => setCheckout(true)}>Preview checkout</button>
+        <p className="checkout-note">Prototype only. Checkout is not live.</p>
+        <div className="plan-line"></div>
+        <p className="plan-caption">Less data drama.<br/><strong>More peace of mind.</strong></p>
+      </aside>
+    </main>
+    <footer className="wrap footer">
+      <details><summary>Important details <span>+</span></summary><p>This is a concept, not a live service. Request availability, frequency, and results depend on company policies, verification, applicable law, and technical access. Deletion is not guaranteed. Credit freezes are free directly from each bureau; this prototype does not place them.</p><a href="https://www.consumerfinance.gov/ask-cfpb/what-do-i-do-if-i-am-a-victim-of-identity-theft-en-31/" target="_blank" rel="noreferrer">Learn about free credit freezes</a></details>
+      <span>BACK OFF MY DATA · CONCEPT</span>
+    </footer>
+    {checkout && <div className="backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setCheckout(false); }}>
+      <div className="dialog" data-checkout-dialog role="dialog" aria-modal="true" aria-labelledby="checkout-title" aria-describedby="checkout-description">
+        <button ref={closeButton} className="close" onClick={() => setCheckout(false)} aria-label="Close checkout preview">×</button>
+        <div className="eyebrow">CHECKOUT PREVIEW</div>
+        <h2 id="checkout-title">Privacy plan</h2>
+        <div className="order"><span>One year of proposed service</span><strong>$79.99</strong></div>
+        <p id="checkout-description">This is a prototype. Checkout is coming later; no payment or personal information is collected.</p>
+        <button className="checkout-button" onClick={() => setCheckout(false)}>Back to the page</button>
+      </div>
+    </div>}
+  </div>;
 }
 
 createRoot(document.getElementById('root')).render(<App/>);
