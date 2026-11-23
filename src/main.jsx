@@ -22,7 +22,7 @@ function App() {
     <main className="hero">
       <div className="eyebrow">YOUR DATA. YOUR CALL.</div>
       <h1>Don’t let your rights<br/><em>get buried in paperwork.</em></h1>
-      <p>Californians can request data broker deletion for free. We’re exploring a simpler way to help—with daily follow-up for a year.</p>
+      <p>Take control of your personal data. BackOffMyData is designed to automate free California deletion requests for a small fee.</p>
       <div className="offer"><strong>$79.99</strong><span> / year</span><button ref={openRef} onClick={() => setCheckout(true)}>Preview checkout</button></div>
       <span className="prototype">Prototype · Not yet available</span>
     </main>
